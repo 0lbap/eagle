@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+
+{% block title %}Accueil{% endblock %}
+
+{% block content %}
+<h1 class="mt-5 mb-4">🦅 Accueil de Eagle</h1>
+<div>
+    <h3 class="mb-3">Nouveau post</h3>
+    {% if username %}
+    <form action="/post/send" method="GET">
+        <input type="hidden" name="author" value="{{ username }}" />
+        <div class="mb-3">
+            <input type="text" name="content" placeholder="Entrez votre message ici" class="form-control" />
+        </div>
+        <div class="text-end">
+            <input type="submit" value="Poster" class="btn btn-primary" />
+        </div>
+    </form>
+    {% else %}
+    <div class="my-5 text-center">
+        <p><a href="/login">Connectez-vous</a> pour pouvoir poster</p>
+    </div>
+    {% endif %}
+</div>
+<div>
+    <h3 class="mb-3">Derniers posts</h3>
+    {% for post in last_posts %}
+    <div class="card mb-3">
+        <a href="/post/{{ loop.revindex0 }}" class="text-decoration-none text-reset">
+            <div class="card-body">
+                <div class="mb-3">
+                    <img src="https://www.thesoupspoon.com/wp-content/uploads/2014/11/user.jpg" alt="PFP" width="24" height="24" class="rounded-circle">
+                    <b>@{{ post.author }}</b>
+                    <small class="text-muted">Le {{ post.date }} à {{ post.time }}</small>
+                </div>
+                <p class="m-0">{{ post.content }}</p>
+            </div>
+        </a>
+    </div>
+    {% endfor %}
+    <div class="m-5">
+        <div class="text-center">
+            <p class="m-0 text-muted">Vous avez vu tous les nouveaux posts !</p>
+        </div>
+    </div>
+</div>
+{% endblock %}

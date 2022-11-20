@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block title %}Connexion{% endblock %}
+
+{% block content %}
+<h1 class="mt-5 mb-4">🔐 Connexion à Eagle</h1>
+<div>
+    <form action="/login" method="POST">
+        <div class="mb-3">
+            <input type="text" name="username" placeholder="Nom d'utilisateur" class="form-control" />
+        </div>
+        <div class="text-end">
+            <input type="submit" value="Se connecter" class="btn btn-primary" />
+        </div>
+    </form>
+</div>
+{% endblock %}
